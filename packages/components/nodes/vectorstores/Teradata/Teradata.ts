@@ -326,9 +326,8 @@ class Teradata_VectorStores implements INode {
                 jwtToken = providedJwtToken
             }
 
-            const flatDocs = docs.flat().map((doc) => doc.pageContent)   
-
             // Generate embeddings
+            const flatDocs = docs.flat().map((doc) => doc.pageContent)
             const embedded_vectors = await embeddings.embedDocuments(flatDocs)
             if (embedded_vectors.length !== flatDocs.length) {
                 throw new Error('The number of embedded vectors does not match the number of documents.')
