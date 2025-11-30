@@ -17,13 +17,15 @@ RUN apk update && \
         cairo-dev \
         pango-dev \
         chromium \
-        curl && \
+        curl \
+        cmake && \
     npm install -g pnpm
 
 ENV PUPPETEER_SKIP_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
 ENV NODE_OPTIONS=--max-old-space-size=8192
+
 
 WORKDIR /usr/src/flowise
 
@@ -35,10 +37,10 @@ RUN pnpm install && \
     pnpm build
 
 # Give the node user ownership of the application files
-RUN chown -R node:node .
+# RUN chown -R node:node .
 
 # Switch to non-root user (node user already exists in node:20-alpine)
-USER node
+# USER node
 
 EXPOSE 3000
 
